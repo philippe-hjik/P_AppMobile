@@ -8,7 +8,7 @@ import { auth } from "../auth/auth.mjs";
 const bookRouter = express();
 
 // Route de get
-bookRouter.get('/', auth, (req, res) => {
+bookRouter.get('/', (req, res) => {
  return Book.findAll()    
  .then((Book) => {
     const message = "La liste des livres a bien été récupérée.";
@@ -21,7 +21,7 @@ bookRouter.get('/', auth, (req, res) => {
 });
 
 // Route GET avec id
-bookRouter.get('/:id', auth, (req, res) => {
+bookRouter.get('/:id', (req, res) => {
     const Id = req.params.id;
     return Book.findByPk(Id)    
     .then((Book) => {
@@ -35,7 +35,7 @@ bookRouter.get('/:id', auth, (req, res) => {
 });
 
 // Route de post
-bookRouter.post('/', auth, (req, res) => {
+bookRouter.post('/', (req, res) => {
     return Book.create(req.body)
     .then((Book) => {
         const message = `Le livre à bien été créé`;
@@ -48,7 +48,7 @@ bookRouter.post('/', auth, (req, res) => {
 });
 
 // Route de update avec id
-bookRouter.put('/:id', auth, (req, res) => {
+bookRouter.put('/:id', (req, res) => {
     const Id = req.params.id;
 
     return Book.findByPk(Id).then((Book) => {
@@ -68,7 +68,7 @@ bookRouter.put('/:id', auth, (req, res) => {
 });
 
 // Route de delete
-bookRouter.delete('/:id', auth, (req, res) => {
+bookRouter.delete('/:id', (req, res) => {
     const Id = req.params.id;
 
     return Book.findByPk(Id).then((Book) => {

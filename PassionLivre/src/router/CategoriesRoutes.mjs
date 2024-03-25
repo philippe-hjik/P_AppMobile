@@ -10,7 +10,7 @@ import { auth } from "../auth/auth.mjs";
 const categoryRouter = express();
 
 // Route de get
-categoryRouter.get("/", auth, (req, res) => {
+categoryRouter.get("/", (req, res) => {
   return category
     .findAll()
     .then((category) => {
@@ -24,7 +24,7 @@ categoryRouter.get("/", auth, (req, res) => {
 });
 
 // Route GET avec id
-categoryRouter.get("/:id", auth, (req, res) => {
+categoryRouter.get("/:id", (req, res) => {
   const Id = req.params.id;
   return category
     .findByPk(Id)
@@ -39,7 +39,7 @@ categoryRouter.get("/:id", auth, (req, res) => {
 });
 
 // tout les livres de cette catégories
-categoryRouter.get("/:id/books", auth, (req, res) => {
+categoryRouter.get("/:id/books", (req, res) => {
   const categoryId = req.params.id;
   let categoryName;
 
@@ -68,7 +68,7 @@ categoryRouter.get("/:id/books", auth, (req, res) => {
 });
 
 // Route de post
-categoryRouter.post("/", auth, (req, res) => {
+categoryRouter.post("/", (req, res) => {
   return category.create(req.body)
     .then((category) => {
       const message = `La categorie à bien été créé`;
@@ -81,7 +81,7 @@ categoryRouter.post("/", auth, (req, res) => {
 });
 
 // Route de update avec id
-categoryRouter.put("/:id", auth, (req, res) => {
+categoryRouter.put("/:id", (req, res) => {
   const Id = req.params.id;
 
   return category
@@ -105,7 +105,7 @@ categoryRouter.put("/:id", auth, (req, res) => {
 });
 
 // Route de delete
-categoryRouter.delete("/:id", auth, (req, res) => {
+categoryRouter.delete("/:id", (req, res) => {
   const Id = req.params.id;
 
   return category
