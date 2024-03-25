@@ -14,7 +14,7 @@ import { categoryRouter } from "./router/CategoriesRoutes.mjs";
 const app = express();
 
 // Port d'écoute
-const port = 3000;
+const port = 80;
 
 //Iniatialise la db avec les models sequelize
 initDb();
