@@ -34661,11 +34661,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pf25xeu\\source\\repos\\MauiAPI\\MauiAPI.csproj",
+      "projectUniqueName": "C:\\Users\\pf25xeu\\Documents\\GitHub\\P_AppMobile\\MauiAPI\\MauiAPI.csproj",
       "projectName": "MauiAPI",
-      "projectPath": "C:\\Users\\pf25xeu\\source\\repos\\MauiAPI\\MauiAPI.csproj",
+      "projectPath": "C:\\Users\\pf25xeu\\Documents\\GitHub\\P_AppMobile\\MauiAPI\\MauiAPI.csproj",
       "packagesPath": "C:\\Users\\pf25xeu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pf25xeu\\source\\repos\\MauiAPI\\obj\\",
+      "outputPath": "C:\\Users\\pf25xeu\\Documents\\GitHub\\P_AppMobile\\MauiAPI\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [

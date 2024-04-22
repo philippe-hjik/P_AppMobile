@@ -31,7 +31,16 @@
                 SemanticProperties.HeadingLevel="Level3"
                 SemanticProperties.Description="Response from HTTP request" />
 
-            <Label
+            <!-- Affichage du contenu du livre -->
+            <Editor 
+                x:Name="BookContentEditor"
+                Text=""
+                HeightRequest="500" 
+                IsReadOnly="True"
+                Placeholder="Book content will be displayed here..."
+                SemanticProperties.Description="Display area for book content" />
+
+                <Label
                 x:Name="ErrorLabel"
                 Text=""
                 Style="{StaticResource BodyText}"

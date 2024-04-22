@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qwaVhDMHxZnFbPYvMwyywMjZsKRvCNJNrPKi3OHeDj6x5u6BMwYT3fDD8KnzNBRSAceEtTE78Pu5hICxsMG4ZA==",
+  "dgSpecHash": "ueYzbxV6eCIkNuvupwiYDjGHV28Lwt4+Ym7NO6GBFqdZg89bEl33U78P0/clWiqi8eiDzwUmJFcia4Hz4jFOEw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pf25xeu\\source\\repos\\MauiAPI\\MauiAPI.csproj",
+  "projectFilePath": "C:\\Users\\pf25xeu\\Documents\\GitHub\\P_AppMobile\\MauiAPI\\MauiAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pf25xeu\\.nuget\\packages\\epubreader\\1.0.0\\epubreader.1.0.0.nupkg.sha512",
     "C:\\Users\\pf25xeu\\.nuget\\packages\\googlegson\\2.10.1.4\\googlegson.2.10.1.4.nupkg.sha512",

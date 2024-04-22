@@ -1,9 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
-using System.Reflection.Metadata;
-using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
 using VersOne.Epub;
-using HtmlAgilityPack;
 
 namespace MauiAPI
 {
@@ -29,80 +29,37 @@ namespace MauiAPI
                     if (response.IsSuccessStatusCode)
                     {
                         // Récupérer le contenu de la réponse sous forme de tableau de bytes
-                        byte[] blob = await response.Content.ReadAsByteArrayAsync();
+                        byte[] epubBytes = await response.Content.ReadAsByteArrayAsync();
 
-                        // Convertir le tableau de bytes en une chaîne base64
-                        string base64Data = Convert.ToBase64String(blob);
-
-                        // Convertir la chaîne base64 en tableau de bytes
-                        byte[] epubData = Convert.FromBase64String(base64Data);
-
-                        // Load the book into memory
-                        EpubBook book = EpubReader.ReadBook("accessible_epub_3.epub");
-
-                        // Print the title and the author of the book
-                        Console.WriteLine($"Title: {book.Title}");
-                        Console.WriteLine($"Author: {book.Author}");
-                        Console.WriteLine();
-
-                        // Print the table of contents
-                        Console.WriteLine("TABLE OF CONTENTS:");
-                        PrintTableOfContents();
-                        Console.WriteLine();
-
-                        // Print the text content of all chapters in the book
-                        Console.WriteLine("CHAPTERS:");
-                        PrintChapters();
-
-                        void PrintTableOfContents()
+                        // Charger le livre électronique à partir des bytes directement
+                        using (MemoryStream epubStream = new MemoryStream(epubBytes))
                         {
-                            foreach (EpubNavigationItem navigationItem in book.Navigation)
-                            {
-                                PrintNavigationItem(navigationItem, 0);
-                            }
-                        }
+                            EpubBook epubBook = EpubReader.ReadBook(epubStream);
 
-                        void PrintNavigationItem(EpubNavigationItem navigationItem, int identLevel)
-                        {
-                            Console.Write(new string(' ', identLevel * 2));
-                            Console.WriteLine(navigationItem.Title);
-                            foreach (EpubNavigationItem nestedNavigationItem in navigationItem.NestedItems)
-                            {
-                                PrintNavigationItem(nestedNavigationItem, identLevel + 1);
-                            }
-                        }
+                            // Afficher le contenu du fichier ePub
+                            // Ici, vous pouvez utiliser les propriétés et les méthodes d'EpubBook pour afficher le contenu dans votre application
 
-                        void PrintChapters()
-                        {
-                            foreach (EpubLocalTextContentFile textContentFile in book.ReadingOrder)
-                            {
-                                PrintTextContentFile(textContentFile);
-                            }
-                        }
+                            // Par exemple, pour afficher le titre et l'auteur
+                            Console.WriteLine($"Title: {epubBook.Title}");
+                            Console.WriteLine($"Author: {epubBook.Author}");
 
-                        void PrintTextContentFile(EpubLocalTextContentFile textContentFile)
-                        {
-                            HtmlDocument htmlDocument = new();
-                            htmlDocument.LoadHtml(textContentFile.Content);
-                            StringBuilder sb = new();
-                            foreach (HtmlNode node in htmlDocument.DocumentNode.SelectNodes("//text()"))
+                            // Afficher le contenu du livre dans un Editor
+                            BookContentEditor.Text = "";
+                            foreach (EpubLocalTextContentFile textContentFile in epubBook.ReadingOrder)
                             {
-                                sb.AppendLine(node.InnerText.Trim());
+                                BookContentEditor.Text += textContentFile.Content + Environment.NewLine + Environment.NewLine;
                             }
-                            string contentText = sb.ToString();
-                            Console.WriteLine(contentText);
-                            Console.WriteLine();
                         }
                     }
                     else
                     {
-                        // Afficher le message d'erreur dans ResponseLabel si la requête échoue
+                        // Gérer les erreurs si la requête échoue
                         ErrorLabel.Text = $"Erreur : {response.StatusCode}";
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Afficher le message d'erreur dans ResponseLabel s'il y a une exception
+                    // Gérer les exceptions
                     ErrorLabel.Text = $"Une erreur s'est produite : {ex.Message}";
                 }
             }
