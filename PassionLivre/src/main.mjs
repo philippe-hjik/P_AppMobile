@@ -17,7 +17,7 @@ const app = express();
 const port = 80;
 
 //Iniatialise la db avec les models sequelize
-//initDb();
+initDb();
 
 // Connexion à la base de donnée grâce à sequelize
 sequelize.authenticate().then((_) => {

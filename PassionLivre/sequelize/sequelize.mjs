@@ -2,6 +2,7 @@ import { DataTypes, Sequelize } from "sequelize";
 
 import { bookModel } from "../model/t_books.mjs";
 import { categoryModel } from "../model/t_categories.mjs"
+import fs from 'fs';
 
 // Permet d'utiliser des variables d'environnement
 import dotenv from 'dotenv';
@@ -26,6 +27,10 @@ const sequelize = new Sequelize(
   }
 );
 
+// Lecture du contenu du fichier ePub
+const epubFilePath = 'C:/Users/pf25xeu/Desktop/books/accessible_epub_3.epub';
+const epubContent = fs.readFileSync(epubFilePath);
+
 // Importation des models sequelize pour créer la structure de données dans la base de données
 const Book = bookModel(sequelize, DataTypes);
 const category = categoryModel(sequelize, DataTypes);
@@ -34,6 +39,7 @@ let initDb = () => {
   return sequelize
     .sync({ force: true }) //Force la syncronisation dans la db et écrase ce qui était présent avant
     .then((_) => {
+      Book.create({ epub: epubContent});
     });
 };
 

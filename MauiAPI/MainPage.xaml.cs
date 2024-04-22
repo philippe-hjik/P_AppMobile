@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,41 +15,51 @@ namespace MauiAPI
         public MainPage()
         {
             InitializeComponent();
-            FetchResponse(); // Appel de la méthode pour effectuer la requête HTTP lors de la construction de la page
         }
 
-        private async void FetchResponse()
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            FetchResponseAsync(); // Appel de la méthode pour effectuer la requête HTTP lors de l'affichage de la page
+        }
+
+        private async void FetchResponseAsync()
         {
             // Effectuer une requête HTTP GET
             using (HttpClient client = new HttpClient())
             {
                 try
                 {
-                    HttpResponseMessage response = await client.GetAsync("http://10.0.2.2/api/books/1");
+                    HttpResponseMessage response = await client.GetAsync("http://10.0.2.2/api");
 
                     if (response.IsSuccessStatusCode)
                     {
                         // Récupérer le contenu de la réponse sous forme de tableau de bytes
                         byte[] epubBytes = await response.Content.ReadAsByteArrayAsync();
 
-                        // Charger le livre électronique à partir des bytes directement
-                        using (MemoryStream epubStream = new MemoryStream(epubBytes))
+                        // Enregistrer les données binaires dans un fichier .epub sur le disque
+                        string epubFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "book.epub");
+                        File.WriteAllBytes(epubFilePath, epubBytes);
+
+                        ResponseLabel.Text = response.ToString();
+                        Debug.Write(response);
+                        Debug.Write("asdasd");
+
+                        // Charger le livre électronique à partir du fichier .epub
+                        EpubBook epubBook = EpubReader.ReadBook(epubFilePath);
+
+                        // Afficher le contenu du fichier ePub
+                        // Ici, vous pouvez utiliser les propriétés et les méthodes d'EpubBook pour afficher le contenu dans votre application
+
+                        // Par exemple, pour afficher le titre et l'auteur
+                        Console.WriteLine($"Title: {epubBook.Title}");
+                        Console.WriteLine($"Author: {epubBook.Author}");
+
+                        // Afficher le contenu du livre dans un Editor
+                        BookContentEditor.Text = "";
+                        foreach (EpubLocalTextContentFile textContentFile in epubBook.ReadingOrder)
                         {
-                            EpubBook epubBook = EpubReader.ReadBook(epubStream);
-
-                            // Afficher le contenu du fichier ePub
-                            // Ici, vous pouvez utiliser les propriétés et les méthodes d'EpubBook pour afficher le contenu dans votre application
-
-                            // Par exemple, pour afficher le titre et l'auteur
-                            Console.WriteLine($"Title: {epubBook.Title}");
-                            Console.WriteLine($"Author: {epubBook.Author}");
-
-                            // Afficher le contenu du livre dans un Editor
-                            BookContentEditor.Text = "";
-                            foreach (EpubLocalTextContentFile textContentFile in epubBook.ReadingOrder)
-                            {
-                                BookContentEditor.Text += textContentFile.Content + Environment.NewLine + Environment.NewLine;
-                            }
+                            BookContentEditor.Text += textContentFile.Content + Environment.NewLine + Environment.NewLine;
                         }
                     }
                     else
@@ -60,7 +71,7 @@ namespace MauiAPI
                 catch (Exception ex)
                 {
                     // Gérer les exceptions
-                    ErrorLabel.Text = $"Une erreur s'est produite : {ex.Message}";
+                    ErrorLabel.Text = $"Une erreur s'est produite : {ex}";
                 }
             }
         }
