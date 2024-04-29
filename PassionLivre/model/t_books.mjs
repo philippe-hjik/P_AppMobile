@@ -7,6 +7,10 @@ const bookModel = (sequelize, DataTypes) => {
           primaryKey: true,
           autoIncrement: true,
         },
+        title: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
         epub: {
           type: DataTypes.BLOB('long'),
           allowNull: false,

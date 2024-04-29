@@ -6,10 +6,10 @@ import fs from 'fs';
 
 // Permet d'utiliser des variables d'environnement
 import dotenv from 'dotenv';
+import { title } from "process";
 
 // Charge les variables d'environnement dans le processus d'application
 dotenv.config();
-
 
 // Importation du cryptage d'information
 //import { hash, bcrypt } from "bcrypt";
@@ -39,7 +39,7 @@ let initDb = () => {
   return sequelize
     .sync({ force: true }) //Force la syncronisation dans la db et écrase ce qui était présent avant
     .then((_) => {
-      Book.create({ epub: epubContent});
+      Book.create({ epub: epubContent, title: "moustique"});
     });
 };
 

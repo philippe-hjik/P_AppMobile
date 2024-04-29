@@ -2,12 +2,11 @@
 import { Book, category } from "../../sequelize/sequelize.mjs"
 import {success} from "../helper.mjs";
 import express from 'express';
-
 import { auth } from "../auth/auth.mjs";
 
 const bookRouter = express();
 
-// Route de get
+/* Route de get
 bookRouter.get('/', (req, res) => {
  return Book.findAll()    
  .then((Book) => {
@@ -19,8 +18,24 @@ bookRouter.get('/', (req, res) => {
     res.status(500).json(success(message, error));
   });
 });
+*/
 
-// Route GET avec id
+bookRouter.get('/', (req, res) => {
+  return Book.findAll({
+     attributes: ["epub", "title"],
+  }).then((result) => {
+    
+   let blob = result[0].epub;
+   res
+     .header("Content-Type","application/epub+zip")  
+     .header('Content-Disposition','attachment; filename="'+result[0].title+'.epub"')
+     .header('Content-Length',blob.length)
+     .send(blob);
+  })
+  
+ });
+
+/* Route GET avec id
 bookRouter.get('/:id', (req, res) => {
     const Id = req.params.id;
     return Book.findByPk(Id)    
@@ -33,6 +48,7 @@ bookRouter.get('/:id', (req, res) => {
        res.status(500).json(success(message, error));
     });
 });
+*/
 
 // Route de post
 bookRouter.post('/', (req, res) => {
