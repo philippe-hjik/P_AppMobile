@@ -49,6 +49,29 @@ namespace MauiAPI
                             // Afficher le contenu du livre dans un Editor
                             BookContentEditor.Text += epubBook.Title + "\n";
 
+                            // Créer une image pour le livre à partir des bytes
+                            var imageStream = new MemoryStream(epubBook.CoverImage); // imageBytes est votre tableau de bytes
+                            // Créer une image pour le livre
+                            Image bookImage = new Image
+                            {
+                                Source = ImageSource.FromStream(() => imageStream),
+                                WidthRequest = 100, // Ajustez la largeur de l'image selon vos besoins
+                                Aspect = Aspect.AspectFit // Ajustez l'aspect de l'image selon vos besoins
+                            };
+                            BookButtonsLayout.Children.Add(bookImage);
+
+                            // Créer un bouton pour le titre du livre
+                            Button titleButton = new Button
+                            {
+                                Margin = new Thickness(10)
+                            };
+
+                            // Ajouter un gestionnaire d'événements pour afficher l'auteur lors du clic sur le titre
+                            titleButton.Clicked += async (sender, args) =>
+                            {
+                                await DisplayAlert("Author", epubBook.Author, "OK");
+                            };
+
                             // Print the table of contents
                             Debug.WriteLine("TABLE OF CONTENTS:");
                             PrintTableOfContents();
@@ -56,6 +79,9 @@ namespace MauiAPI
                             // Print the text content of all chapters in the book
                             Debug.WriteLine("CHAPTERS:");
                             PrintChapters();
+
+                            // Ajouter le bouton au layout
+                            BookButtonsLayout.Children.Add(titleButton);
 
                             void PrintTableOfContents()
                             {
@@ -69,6 +95,7 @@ namespace MauiAPI
                             {
                                 Debug.Write(new string(' ', identLevel * 2));
                                 Debug.WriteLine(navigationItem.Title);
+                                titleButton.Text += navigationItem.Title+"\n";
                                 //BookContentEditor.Text += "" + navigationItem.Title;
                                 foreach (EpubNavigationItem nestedNavigationItem in navigationItem.NestedItems)
                                 {

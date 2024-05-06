@@ -23,6 +23,10 @@
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
+            <StackLayout x:Name="BookButtonsLayout" Spacing="5">
+                <!-- Les boutons pour les titres des livres seront ajoutés ici dynamiquement -->
+            </StackLayout>
+
             <Label
                 x:Name="ResponseLabel"
                 Text=""
