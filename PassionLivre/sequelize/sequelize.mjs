@@ -28,8 +28,25 @@ const sequelize = new Sequelize(
 );
 
 // Lecture du contenu du fichier ePub
-const epubFilePath = 'C:/Users/pf25xeu/Desktop/books/accessible_epub_3.epub';
-const epubContent = fs.readFileSync(epubFilePath);
+//const epubFilePath = 'C:/Users/pf25xeu/Desktop/books/accessible_epub_3.epub';
+const epubFilePath = 'C:/Users/pf25xeu/Desktop/books/';
+//const epubContent = fs.readFileSync(epubFilePath);
+let epubFile = [];
+// Lire le contenu du dossier
+fs.readdir(epubFilePath, (err, files) => {
+  // Gérer les erreurs
+  if (err) {
+      console.error('Erreur de lecture du dossier :', err);
+      return;
+  }
+
+  // Afficher les fichiers du dossier
+  files.forEach(file => {
+      let epubContent = fs.readFileSync(`${epubFilePath}${file}`);
+      epubFile.push({epub: epubContent, title: file});
+  });
+});
+
 
 // Importation des models sequelize pour créer la structure de données dans la base de données
 const Book = bookModel(sequelize, DataTypes);
@@ -39,7 +56,10 @@ let initDb = () => {
   return sequelize
     .sync({ force: true }) //Force la syncronisation dans la db et écrase ce qui était présent avant
     .then((_) => {
-      Book.create({ epub: epubContent, title: "moustique"});
+      epubFile.forEach(file => {
+        Book.create(file);
+      });
+      
     });
 };
 

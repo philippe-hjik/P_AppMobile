@@ -26,29 +26,34 @@ bookRouter.get('/', (req, res) => {
   }).then((result) => {
     
    let blob = result[0].epub;
-   res
+   res.status(200)
      .header("Content-Type","application/epub+zip")  
-     .header('Content-Disposition','attachment; filename="'+result[0].title+'.epub"')
+     .header('Content-Disposition','attachment; filename="'+result[0].title)
      .header('Content-Length',blob.length)
      .send(blob);
   })
   
  });
 
-/* Route GET avec id
+// Route GET avec id
 bookRouter.get('/:id', (req, res) => {
     const Id = req.params.id;
     return Book.findByPk(Id)    
     .then((Book) => {
-       const message = `Le livre dont le livre vaut ${Id}`;
-       res.status(200).json(success(Book, message));
+      console.log(Book);
+      let blob = Book.epub;
+      res.status(200)
+        .header("Content-Type","application/epub+zip")  
+        .header('Content-Disposition','attachment; filename="'+Book.title)
+        .header('Content-Length',blob.length)
+        .send(blob);
+
      })
      .catch((error) => {
-       const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
+       const message = `Le Livre n'a pas pu être récupéré. Merci de réessayer dans quelques instants. ${error}`;
        res.status(500).json(success(message, error));
     });
 });
-*/
 
 // Route de post
 bookRouter.post('/', (req, res) => {
