@@ -83,7 +83,7 @@ namespace MauiAPI
                             // Print the text content of all chapters in the book
                             Debug.WriteLine("CHAPTERS:");
                             PrintChapters();
-
+                            
                             // Ajouter le bouton au layout
                             BookButtonsLayout.Children.Add(titleButton);
 
