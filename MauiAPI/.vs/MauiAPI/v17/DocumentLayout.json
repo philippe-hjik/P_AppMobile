@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1A08BBCF-B11B-455C-9B89-18965A4FBD22}|MauiAPI.csproj|c:\\users\\pf25xeu\\documents\\github\\p_appmobile\\mauiapi\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1A08BBCF-B11B-455C-9B89-18965A4FBD22}|MauiAPI.csproj|solutionrelative:mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1A08BBCF-B11B-455C-9B89-18965A4FBD22}|MauiAPI.csproj|c:\\users\\pf25xeu\\documents\\github\\p_appmobile\\mauiapi\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{1A08BBCF-B11B-455C-9B89-18965A4FBD22}|MauiAPI.csproj|solutionrelative:mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,22 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainPage.xaml",
-              "DocumentMoniker": "C:\\Users\\pf25xeu\\Documents\\GitHub\\P_AppMobile\\MauiAPI\\MainPage.xaml",
-              "RelativeDocumentMoniker": "MainPage.xaml",
-              "ToolTip": "C:\\Users\\pf25xeu\\Documents\\GitHub\\P_AppMobile\\MauiAPI\\MainPage.xaml",
-              "RelativeToolTip": "MainPage.xaml",
-              "ViewState": "AQIAABAAAAAAAAAAAAAAwBkAAAA+AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-15T10:49:18.696Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -42,10 +24,9 @@
               "RelativeDocumentMoniker": "MainPage.xaml.cs",
               "ToolTip": "C:\\Users\\pf25xeu\\Documents\\GitHub\\P_AppMobile\\MauiAPI\\MainPage.xaml.cs",
               "RelativeToolTip": "MainPage.xaml.cs",
-              "ViewState": "AQIAADAAAAAAAAAAAAAAwD4AAABFAAAA",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAcwFcAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-15T10:49:24.055Z",
-              "IsPinned": true,
+              "WhenOpened": "2024-05-13T11:38:05.543Z",
               "EditorCaption": ""
             }
           ]
